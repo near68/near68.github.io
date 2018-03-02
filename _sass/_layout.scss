@@ -137,7 +137,11 @@ li {
 
 .post-list li a:hover {
 	text-decoration: none;
-	opacity: 0.8;
+	opacity: 0.7;
+}
+
+.post-list li a:visited {
+	color: #828282;
 }
 
 #line {
