@@ -135,6 +135,11 @@ li {
 	color: #000;	
 }
 
+.post-list li a:hover {
+	text-decoration: none;
+	opacity: 0.8;
+}
+
 #line {
 	opacity: 0.1;
 	color: #000;
