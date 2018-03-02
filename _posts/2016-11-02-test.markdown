@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Jekyll和Github搭建个人静态博客"
+title:  "Hello World."
 date:   2016/11/02 13:03:42
-categories: w
+categories: 杂
 ---
-# 测试
+> 测试
