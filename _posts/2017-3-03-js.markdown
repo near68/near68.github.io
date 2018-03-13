@@ -21,6 +21,7 @@ categories: javascript
     - RegExp
 
 ### 3. 隐式类型转换
+
 ```
 '123' + 0 //123,转换成number类型
 123 + '' //'123',转换成string类型
@@ -40,8 +41,10 @@ NaN == NaN //false，自己都不等于自己
 1. String
 2. Number
 3. Boolean
+
 ### 5. 类型检测
 1. typeof
+
 ```
 //适合基本类型和function，除了null外
 typeof NaN // "number"
@@ -49,19 +52,18 @@ typeof (undefined) // "undefined"
 typeof Function //"function"
 typeof null // "object"
 ```
+
 2. instanceof
+
 ```
 //用于判断对象是否属于某构造器，判断是否有继承关系。
 //Array,Date,RegExp等用于判断类型
-
 obj instanceof Object
 [] instanceof Array ===true //true
-
 ```
+
 3. Object.prototype.toString
-
 4. constructor
-
 5. duck type
 
 # 二、表达式和运算符
