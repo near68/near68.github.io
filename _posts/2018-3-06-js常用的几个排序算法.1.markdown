@@ -1,0 +1,54 @@
+---
+layout: post
+title:  "Algorithm"
+date:   2018/03/06 12:03:42
+categories: 算法
+---
+>几个常用的排序算法
+
+1. 原生自带排序`sort()`
+```javascript
+var arr = [3,65,545,1,566,888,999]
+//升序
+arr.sort((a, b) => a - b)//[1, 3, 65, 545, 566, 888, 999]
+
+//降序
+arr.sort((a, b) => b - a)//[999, 888, 566, 545, 65, 3, 1]
+
+//直接使用
+arr.sort()//[1, 3, 545, 566, 65, 888, 999]
+```
+2. 冒泡排序
+
+```javascript
+var bubbleSort = function(arr){
+  var len = arr.length
+  for(var i=0; i<len; i++){
+    for(var j=0; j<len -1 -i; j++){
+      if(arr[i] > arr[j+1]){
+        var temp = arr[j+1];
+        arr[j+1] = arr[j]
+        arr[j] = temp
+      }
+    }
+  }
+  return arr
+}
+```
+3. 快速排序
+
+```javascript
+var quicksort = function(arr){
+  if(arr.length <= 1) return arr
+
+  var midindex = Math.floor(arr.lenght/2)
+  var midindexval = arr.splice(midindex, 1)
+  var l = []
+  var r = []
+  for(var i=0; i<arr.length; i++){
+    if( arr[i] < midindexval){ l.push(arr[i]) }
+    else{ r.push(arr[i]) }
+  }
+  return quicksort(l).concat( midindexval, quicksort(r) )
+}
+```
