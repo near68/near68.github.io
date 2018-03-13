@@ -20,23 +20,22 @@ categories: javascript
     - Date
     - RegExp
 ### 3. 隐式类型转换
+
 ```
-//简单的隐式类型转换
 '123' + 0 //123,转换成number类型
 123 + '' //'123',转换成string类型
 '3' + 1 //'31',字符串拼接string类型
 '3' - 1 //2, 转换成number类型
 
-//==两个等号会自动转换数据类型再比较
 '1' == 1//true
 null == undefined //true
 0 == false //true
 NaN == NaN //false，自己都不等于自己
 
-//===三个等号是全等，类型也必须一样
 0 === false// false
 '1' === 1 //false
 ```
+
 ### 4. 包装对象
 1. String
 2. Number
