@@ -106,6 +106,7 @@ obj instanceof Object
     - window.x = 1 'x' in window //in运算符 true
     - this
     - void 0//不管是0还是什么都返回 undefined
+
 ```
 function Foo(){}
 Foo.prototype.x = 1
@@ -113,10 +114,11 @@ var obj = new Foo()
 obj.x //1
 obj.hasOwnProperty('x')//false 判断x是否在对象上
 obj.__peoto__.hasOwnProperty('x')//true  判断x是否在原型上
- ```
+```
 
 # 三、语句
 ### 1.block语句
+
 ```
 //用于组合语句,一般结合for if while之类的
 {
@@ -144,7 +146,9 @@ foo()
 console.log(a)//undefined  a是函数作用域内部
 console.log(b)//1   b是全局，并没有var声明
 ```
+
 ### 2.try...catch
+
 ```
 //catch或者finally必须写一个不能只有try
 //也可以catch和finally都写
@@ -156,11 +160,11 @@ try{
 }finally{
   console.log('finally')
 }
-
 ```
 
 ### 3. 函数、swich、循环
 1. function
+
 ```
 //函数声明，可以在它之前调用他
 a()//true
@@ -170,17 +174,20 @@ function a(){}
 b()//TypeError: b is not a function
 var b = function(){}
 ```
+
 2. for ... in
+
 ```
 //for in遍历是不按顺序的
 //受原型链影响
 var obj={a: 1, b: 2}
 var x
 for(x in obj){
-
 }
 ```
+
 3. switch
+
 ```
 //条件分支语句
 var val = 2
@@ -205,5 +212,4 @@ switch(val){
     default:
         console.log(3);
 }//2, 3
-
 ```
