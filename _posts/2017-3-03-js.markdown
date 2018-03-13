@@ -88,7 +88,7 @@ obj instanceof Object
 6. 对象创建表达式
     - new Func(1, 2)
     - new Object
-----
+
 ### 2.运算符：
 
 1. 一元表达式： +num 
