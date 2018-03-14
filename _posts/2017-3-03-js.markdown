@@ -10,8 +10,8 @@ categories: javascript
   1. number
   2. string
   3. boolean
-  4. null
-  5. undefined
+  4. null 只有一个值，就是它本身，表示一个空对象指针
+  5. undefined 只有一个值，就是它本身
 
 ## 2. 复杂数据类型
 1. Object
@@ -252,3 +252,39 @@ function(){
 
 # 四、对象
 
+1. 对象属性是无序的，每个属性都有一个字符串key和对应的value
+2. 对象属性是可以动态添加和删除的
+3. 创建对象
+
+```
+//1.对象创建-字面量
+var obj1 = {x:1, y:2, z:{ a:2, b:3}}
+
+//2.对象创建-new/原型链
+function foo(){}
+foo.prototype.x = 3//在foo原型上添加
+
+var obj1 = new foo()
+obj1.a = 1
+obj1.b = 2
+
+obj1.a //1
+obj1.b //2
+obj1.x //3   在obj1上没有x属性，它会通过原型链__proto__在foo上找到，如果再找不到会去Object.prototype上找,再向上是null,找不到就返回undefined
+obj1.hasOwnProperty('x') //false 说明x属性并不在obj1上
+obj1.x = 4 // 这时候会添加一个x，而不是修改的foo.prototype.x
+obj1.x // 4
+obj1.hasOwnProperty('x') // true 可以发现obj1已经有了x属性
+foo.prototype.x //3 foo原型上的x和一开始的值一样，并没有受影响 
+obj.x = undefined //undefined 并不是没有x，而是x的值改成了undefined
+delete obj1.x //true  成功删除了obj1身上的x
+obj1.x //3   删掉obj1身上的x,又会通过原型链找到foo.prototype，所以是3
+
+
+//3.创建对象-Object.create
+var obj1 = Object.cretae({a:1})
+obj1.a //1
+obj1.hasOwnProperty('a') //false 在原型链上继承而来，并非它本身拥有a属性
+```
+
+4. 属性读写
