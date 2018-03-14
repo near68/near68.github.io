@@ -4,23 +4,23 @@ title:  "Javascript一些简单的基础"
 date:   2017/03/03 15:03:42
 categories: javascript
 ---
->简单基础
+
 # 一. 数据类型
-### 1. 简单数据类型
-  1. bumber
+## 1. 简单数据类型
+  1. number
   2. string
   3. boolean
   4. null
   5. undefined
 
-### 2. 复杂数据类型
+## 2. 复杂数据类型
 1. Object
     - Function
     - Array
     - Date
     - RegExp
 
-### 3. 隐式类型转换
+## 3. 隐式类型转换
 
 ```
 '123' + 0 //123,转换成number类型
@@ -37,12 +37,12 @@ NaN == NaN //false，自己都不等于自己
 '1' === 1 //false
 ```
 
-### 4. 包装对象
+## 4. 包装对象
 1. String
 2. Number
 3. Boolean
 
-### 5. 类型检测
+## 5. 类型检测
 1. typeof
 
 ```
@@ -67,7 +67,7 @@ obj instanceof Object
 5. duck type
 
 # 二、表达式和运算符
-### 1. 表达式：
+## 1. 表达式：
 
 1. 原始表达式
     - 常量、直接量: 3.1415 , 'str'
@@ -89,7 +89,7 @@ obj instanceof Object
     - new Func(1, 2)
     - new Object
 
-### 2.运算符：
+## 2.运算符：
 
 1. 一元表达式： +num 
 2. 二元表达式： num1 + num2
@@ -100,7 +100,8 @@ obj instanceof Object
 7. 位：a | b
 8. 逻辑：exp && exp2
 9. 字符串: 'a' + 'b'
-10. 特殊: delete obj.a
+10. 特殊: 
+    - delete obj.a
     - var val=(1,2,3)//3  取最右
     - var obj= {a: 1} delete obj.a   obj.a //delete删除返回undefined
     - window.x = 1 'x' in window //in运算符 true
@@ -117,7 +118,7 @@ obj.__peoto__.hasOwnProperty('x')//true  判断x是否在原型上
 ```
 
 # 三、语句
-### 1.block语句
+## 1.block语句
 
 ```
 //用于组合语句,一般结合for if while之类的
@@ -147,7 +148,7 @@ console.log(a)//undefined  a是函数作用域内部
 console.log(b)//1   b是全局，并没有var声明
 ```
 
-### 2.try...catch
+## 2.try...catch
 
 ```
 //catch或者finally必须写一个不能只有try
@@ -162,7 +163,7 @@ try{
 }
 ```
 
-### 3. 函数、swich、循环
+## 3. 函数、swich、循环
 1. function
 
 ```
@@ -213,3 +214,41 @@ switch(val){
         console.log(3);
 }//2, 3
 ```
+
+4. while、do while、for、with
+
+```
+while(true){
+   //do sth
+}
+
+do{
+    //just 1
+}while(is true){
+
+}
+
+var i
+for(i=0; i<10; i++){
+    //do sth
+}
+
+//strict模式下已经禁止,不建议使用
+with({x:1}){
+    console.log(x)
+}
+```
+
+## 4.strict严格模式
+
+```
+//严格模式的使用
+'use strict';
+function(){
+
+}
+//严格模式下，未声明的变量不能使用，不像非严格模式，会在window下创建
+```
+
+# 四、对象
+
