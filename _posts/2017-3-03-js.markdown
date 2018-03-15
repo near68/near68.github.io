@@ -252,9 +252,9 @@ function(){
 
 # 四、对象
 
-1. 对象属性是无序的，每个属性都有一个字符串key和对应的value
-2. 对象属性是可以动态添加和删除的
-3. 创建对象
+### 1. 对象属性是无序的，每个属性都有一个字符串key和对应的value
+### 2. 对象属性是可以动态添加和删除的
+### 3. 创建对象
 
 ```
 //1.对象创建-字面量
@@ -287,4 +287,303 @@ obj1.a //1
 obj1.hasOwnProperty('a') //false 在原型链上继承而来，并非它本身拥有a属性
 ```
 
-4. 属性读写
+### 4. 属性操作
+1. 读写读写对象属性
+
+    ```
+    //对象字面量
+    var obj1 = {x: 1, y: 2}
+    obj1.x //1
+    obj1['y'] //2
+
+    //遍历的方法
+    var obj2 = {x1: 1, x2: 2, x3: 3 ...}
+    for(var i=1; i<4; i++){
+        console.log(obj2['x'+1])
+    }
+
+    or
+
+    //for in 会有可能出问题，会把原型上的东西打出来，而且是无序的
+    for(var i in obj2){
+        console.log(obj2[i])
+    }
+
+    //写入
+    var obj3 = {x:1}
+    obj3.y = 2
+  
+    ```
+
+2. 属性删除
+
+    ```
+    //删除属性
+    var person = {age: 22, title: 'title'}
+    delete person.age //true
+    delete person['age']//true
+    person.age //undefined
+    delete person.age //true 虽然已经删除，再次删除依然会返回true,只是并没有做任何事
+
+    delete Object.prototype //false prototype是无法被删除的，会返回false
+
+    ```
+
+3. 属性检测
+
+    ```
+    //可以使用in来判断属性是否存在
+    var obj = {x:1, age: 3}
+    'age' in obj //true
+    'a' in obj //false
+    'toString' in obj //true 原型上有
+    ```
+
+4. 枚举
+
+    ```
+    var obj = Object.create(o)
+    obj.a = 4
+
+    for (var key in obj){
+        if(obj.hasOwnProperty(key)){//这么写可以防止原型链上的s属性也被打印出来
+            console.log(key)//a
+        }
+    }
+    ```
+
+5. 使用get/set 读写
+
+    ```
+    //get and set
+    var man = {
+        name: 'Leo',
+        age: 23,
+        get age(){
+            return new Date().getFullYear()-1999
+        },
+        set age(val){
+            console.log('Age can\'t be set to' + val)
+        }
+    }
+    console.log(man.age)//17  2016年-1999
+    man.age = 100 //Age can't be set to 100
+    console.log(man.age)//17
+
+    ```
+
+# 五、数组
+
+### 1. 创建和操作数组
+
+```
+//数组是值的有序集合。每个值叫做元素，每个元素都有位置编号，就是索引。javascript的数组是弱类型，可以含有不同类型的元素，甚至是数组和对象。
+//数组最长不能超过  2^32-1   4294967295
+//创建数组-字面量
+var arr = [1, true, undefined, [1,2,3], {x:1}, null]
+
+
+//创建数组-new Array()
+var arr1 = new Array(10)//10个undefined
+var arr2 = new Array(true,false,1,'str')
+var arr3 = Array(true,false,unll)
+var arr4 = [a,,b]//a,undefined,b
+var arr5 = [,,]//undefined,undefined  数组允许最后一个元素后面还有一个逗号
+
+//数组读写
+var arr = [1, 2, 3, 4, 5]
+arr[1]//2
+arr.length//5
+arr[5] = 6
+arr.length//6
+
+//增加
+var arr = [1,2,3]
+arr.push(4)
+arr//[1, 2, 3, 4]
+arr[arr.length] = 5
+arr//[1, 2, 3, 4, 5]
+
+//删除
+arr1 = [1, 2, 3, 4]
+delete arr1[1]
+arr1[1]//undefined
+arr1.length//4
+2 in arr1//false
+arr1//[1, undefined, 3, 4]
+arr1.length -=1 //删除了最后一个 [1, undefined, 3]
+arr1.pop()
+arr1//[1, undefined]
+
+arr1.shift()//删除第一个，索引0
+arr1//[undefined]
+```
+
+### 2. 数组迭代
+
+```
+//for
+var arr =[1,2,3,4,5,6]
+for(var i=0; i<arr.length; i++){
+    console.log(arr[i])
+}
+
+//for in 
+var i = 0
+for(i in arr){
+    console.log(arr[i])
+}
+//由于for in会打印出原型上的属性,且无序
+Array.prototype.x ='a'
+for(i in arr){
+    console.log(arr[i])
+}
+//1,2,3,4,5,6,a
+//因此要判断一下
+for(i in arr){
+    if(arr.hasOwnProperty(i)){
+        console.log(arr[i])
+    }
+}
+
+```
+
+### 3. 二维数组
+
+```
+var arr=[[0,1],[2,3],[4,5]]
+var i=0, j=0
+var row
+for(; i < arr.length; i++){
+    row =arr[i]
+    console.log('row ' + i)
+    for(; j < row.length; j++){
+        console.log(row[j])
+    }
+}
+//row 0   0 1
+//row 1   2 3
+//row 2   4 5
+```
+
+### 4.数组方法
+
+
+数组，数组的原型上定义有不少数组方法
+
+`[] || new Array()`
+
+方法 |说明|
+----|----|---
+Array.prototype.join | 用给定的字符拼接成字符串 | 
+Array.prototype.reverse | 逆序 |
+Array.prototype.sort | 排序 |
+Array.prototype.concat | 数组合并 |
+Array.prototype.slice | 切片|
+Array.prototype.splice | 胶接，可删除可添加 |
+Array.prototype.forEach | 遍历（ES5）|
+Array.prototype.map | 映射（ES5）|
+Array.prototype.filter | 过滤（ES5）|
+Array.prototype.every | 检测数组是否全部符合某条件（ES5）|
+Array.prototype.some | 检测数组元素中是否有元素符合指定条件（ES5）|
+Array.prototype.reduce | 将数组元素计算为一个值（ES5）|
+Array.prototype.indexOf | 搜索数组中的元素，并返回它所在的位置（ES5）|
+
+
+# 六、函数和作用域
+
+### 1. 创建函数——函数声明和函数表达式
+
+```
+//函数声明，会前置，随地可调用
+function fnc(){}
+
+//函数表达式,不会前置，必须先声明后调用，递归的时候用
+var fnc = function(){}
+
+//立即执行函数表达式
+(function(){})()
+
+//命名函数表达式,有名称的函数表达式，不会前置，必须先声明后调用
+var func = function foo(){}
+
+//Function构造器,比较少用,不常见
+var func = new Function('a','b', console.log(a+b))
+func(1,2)//3
+```
+
+### 2. this
+
+```
+//谁调用就指向谁，由调用的对象来确定this指向
+this.a = 37
+console.log(window.a)//37
+
+function fn1(){
+    return this
+}
+fn1() === window//true
+
+
+function fn2(){
+    'use strict'
+    reutrn this
+}
+fn2() === undefined //true 严格模式是找不到的
+
+
+//作为对象方法的函数this
+var o = {
+    prop: 37,
+    fn: function(){
+        return this.prop
+    }
+}
+console.log(o.fn())// 37
+
+
+var o = {prop: 36}
+function inin(){
+    return this.prop
+}
+o.fn = inin
+console.log(o.fn())//36 谁调用就是谁
+
+
+//对象原型链上的this
+var o ={ fn: function(){return this.a + this.b} }
+var p =Object.create(o)
+p.a = 1
+p.b = 2
+console.log(p.fn())//3  p的原型是o, p.fn()是o上的fn 
+
+
+//*构造器的this
+function MyClass(){
+    this.a = 1
+}
+var o = new MyClass()
+console.log(o.a)//1  MyClass并没有返回对象{}， o通过new继承了MyClass
+
+function Class2(){
+    this.a = 2
+    return {a: 3}
+}
+o = new Class2()
+console.log(o.a)//3 由于Class2返回了对象{a:3}所以o通过new得到的是a: 3
+
+```
+
+### 3. claa\apply方法与this 
+
+```
+function add(c, d){
+    return this.a + this.b +c +d
+}
+var o = {a:1, b:2}
+
+add.call(o,3,4)//1+2+3+4=10 //call就是直接传
+
+add.apply(o, [5, 6])//1+2+5+6=14 apply是把传入的变成数组来传
+
+```
