@@ -574,7 +574,7 @@ console.log(o.a)//3 由于Class2返回了对象{a:3}所以o通过new得到的是
 
 ```
 
-### 3. claa\apply方法与this 
+### 3. call\apply方法与this 
 
 ```
 function add(c, d){
