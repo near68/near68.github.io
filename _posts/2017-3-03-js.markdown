@@ -587,3 +587,133 @@ add.call(o,3,4)//1+2+3+4=10 //call就是直接传
 add.apply(o, [5, 6])//1+2+5+6=14 apply是把传入的变成数组来传
 
 ```
+
+### 4. 函数属性&argument
+
+```
+function foo(x, y, z){
+    arguments.length//2
+    arguments[0] //1
+    arguments[0] = 10
+    x//change to 10
+    arguments[2] = 20
+    z//undefined 由于调用函数的时候并没有给z传入参数，所以直接arguments[2]赋值无效
+    arguments.callee === foo //true  callee是一个指向正在执行的函数的指针，严格模式下是禁止使用的
+}
+foo(1, 2)
+foo.length//2
+foo.name//foo
+
+//call/apply
+function foo(){
+    console.log(x, y, this)
+}
+foo.call(100, 1, 2) //1, 2, Number(100)
+foo.apply(true,[3, 4]) //3, 4, Boolean(true)
+foo.apply(null) //undefined, undefined, window
+foo.apply(undefined) //undefined, undefined, window
+```
+
+### 5. 闭包
+
+1. 闭包就是有权访问另一个函数作用域中的变量的函数
+2. 闭包很常见，缺点是常驻内存，不小心使用会内存泄漏占,一些新浏览器的引擎会尝试回收被闭包占用的内存
+3. 优点是可以封装，灵活方便
+```
+function outer(){
+    var localVal = 1
+    return localVal
+}
+outer()//1
+
+function outer(){
+    var loaclVal = 2
+    return function(){//由于function也是对象，所以可以嵌套并且返回
+        return localVal
+    }
+}
+outer()()//2  outer返回的是个函数，需要再次执行被返回的内部函数，才能得到2
+
+
+
+//经典闭包
+function createFunc(){
+    var result = []
+    for(var i=0; i<10; i++){
+        result[i] = function(){
+            return i
+        }
+    }
+    return result
+}//[ƒ, ƒ, ƒ, ƒ, ƒ, ƒ, ƒ, ƒ, ƒ, ƒ]每个都是10，因为指向的都是同一个i，就是完成循环后的10
+
+//解决办法
+function createFunc(){
+    var result = []
+    for(var i=0; i<10; i++){
+        result[i] = function(num){
+            return function(){
+                return num
+            }
+        }(i)
+    }
+    return result
+}
+
+```
+
+### 6. 作用域
+
+1. 全局作用域
+2. 函数作用域（没有块级作用域）
+3. eval作用域
+
+```
+//全局
+for(var i=0; i<10; i++){
+    console.log(i)//0,1,2,3,4,5,6,,7,8,9
+}
+console.log(i)//10 外部可以读取到i，循环结束后i为10
+
+
+//函数作用域可以封装起来，避免污染到全局作用域
+(function(){
+    var a=2
+})()
+or
+!function(){
+    var a=2
+}()
+console.log(a)//a is not defined
+```
+4. 变量对象-Variable Object
+
+```
+//变量对象VO就是Variable Object，是一个抽象概念中的对象
+VO(golbalContext)===[[global]] (VO === this === global)
+
+//我们能直接调用Math String isNaN...的原因是什么？
+//因为浏览器在我们开始代码前，js引擎会把对应的全局的东西初始化到VO下
+VO(golbalContext)===[[global]]
+[[global]] = {
+    Math: <...>,
+    String: <...>,
+    isNaN: function(){[Native Code]}
+    ...
+    ...
+    window: global
+}
+GlobalContextVO
+String(10)//[[golbal]].String(10)
+window.a = 10 //[[golbal]].window.a = 10
+this.a =2 //[[golbal]].b = 2
+
+```
+
+
+
+# 七、OOP
+
+
+
+# 八、正则
