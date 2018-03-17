@@ -713,7 +713,27 @@ this.a =2 //[[golbal]].b = 2
 
 
 # 七、OOP
+1. 面向对象程序设计(Object Oriented Programming，OOP)，是一种程序设计范型，**对象指的是类的实例**，它将对象作为程序的基本单元，将程序和数据封装其中，以提高软件的重用性、灵活性和扩展性。
+2. 面向对象主要特征：
+    1. 封装 2. 继承 3. 多态 4. 抽象
+    
+3. JavaScript的面向对象——基于原型的继承
 
+```
+function Foo(){}
+
+```
 
 
 # 八、正则
+1. String.prototype.seach(reg)
+2. String.prototype.replace(reg, text)
+3. String.prototype.split(reg)
+4. String.prototype.match(reg)
+5. reg.test(str)
+
+```
+//. 任意字符 重复
+'abc'.replace(/./g, '$&$&');//aabbcc
+
+```
