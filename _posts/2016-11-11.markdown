@@ -1,0 +1,39 @@
+---
+layout: post
+title:  "CSS小技巧和注意事项"
+date:   2016/11/11 20:00:00
+categories: CSS
+---
+## inline-block元素间多出一个空格
+情况如图示：
+
+![](./images/161111/1.png)
+
+解决方法：
+  1. 两个标签间不回车，回车直接导致了有个间隔
+
+  ```HTML
+  <div class="cont">
+    <div>inline-block</div><div>inline-block</div>
+  </div>
+
+  ```
+
+  2. 把父元素的font-size设为0，回车继承了父元素的字体大小为0，便不占位
+
+----------------
+
+## inline-block元素垂直方向不对齐
+情况如图示：
+
+![](./images/161111/2.png)
+
+解决方法：
+  1. 给其中一个元素添加vertical-align
+
+  ```CSS
+  {
+  ...
+    vertical-align: top;
+  }
+  ```
