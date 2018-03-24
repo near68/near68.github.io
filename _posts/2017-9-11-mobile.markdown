@@ -1,0 +1,57 @@
+---
+layout: post
+title:  "移动端CSS样式若干问题"
+date:   2016/11/11 20:00:00
+categories: CSS
+---
+## 一、移动端显示1像素border问题
+问题：
+
+  由于不同的手机屏幕的不同，虽然css写的是1px，但手机上显示的是2px
+
+解决办法：
+```
+.border-1px
+  position: relative
+
+.border-1px:after
+  content: ' '
+  display: block
+  position: absolute
+  left: 0
+  bottom: 0
+  width: 100%
+  border-top: 1px solid #ccc
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+.border-1px:after
+  -webkit-transform: scaleY(0.5)
+  transform: scaleY(0.5)
+
+##stylus可以定义一个公共的class和一个公共的1px的border
+
+@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)
+  .border-1px
+    &:after
+      -webkit-transform: scaleY(0.7)
+      transform: scaleY(0.7)  
+
+@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)
+  .border-1px
+    &:after
+      -webkit-transform: scaleY(0.5)
+      transform: scaleY(0.5)
+
+border-1px($color)
+  position: relative
+  &:after
+    display: block
+    position: absolute
+    left: 0
+    bottom: 0
+    width: 100%
+    border-top: 1px solid $color
+    content: ' '
+
+```
+添加伪类，并用@media来判断像素比，不同像素比用不同的缩放,2的用scale(0.5)1.5的用scale(0.7)

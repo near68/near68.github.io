@@ -4,7 +4,7 @@ title:  "CSS小技巧和注意事项"
 date:   2016/11/11 20:00:00
 categories: CSS
 ---
-## inline-block元素间多出一个空格
+## 一、inline-block元素间多出一个空格
 情况如图示：
 
 ![](../../../../images/post-images/161111/1.png)
@@ -23,7 +23,7 @@ categories: CSS
 
 ----------------
 
-## inline-block元素垂直方向不对齐
+## 二、inline-block元素垂直方向不对齐
 情况如图示：
 
 ![](../../../../images/post-images/161111/2.png)
@@ -37,3 +37,4 @@ categories: CSS
     vertical-align: top;
   }
   ```
+---------
