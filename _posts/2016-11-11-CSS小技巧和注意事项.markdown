@@ -7,7 +7,7 @@ categories: CSS
 ## inline-block元素间多出一个空格
 情况如图示：
 
-![](../../../../images/161111/1.png)
+![]({{site.url}}/images/post-images/161111/1.png)
 
 解决方法：
   1. 两个标签间不回车，回车直接导致了有个间隔
@@ -26,7 +26,7 @@ categories: CSS
 ## inline-block元素垂直方向不对齐
 情况如图示：
 
-![](../images/161111/2.png)
+![](near68.github.io/images/post-images/161111/2.png)
 
 解决方法：
   1. 给其中一个元素添加vertical-align
